@@ -96,6 +96,7 @@ h2 {
 
 .downloads-content p {
     margin: 10px 0;
+    font-size: 1.1em; /* Slightly larger for readability on 404 page */
 }
 
 .downloads-content ul {
@@ -153,6 +154,9 @@ h2 {
     .downloads-link, .back-link {
         font-size: 1em;
         padding: 8px 15px;
+    }
+    .downloads-content p {
+        font-size: 1em;
     }
     #lang-toggle {
         width: 35px;

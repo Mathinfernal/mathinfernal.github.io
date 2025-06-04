@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title data-lang-key="404_title">404 - Page Not Found</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="monstyle.css">
+    </head>
+    <body>
+        <div class="container">
+            <button id="lang-toggle" aria-label="Toggle language">EN</button>
+            <h1 data-lang-key="404_heading">Page Not Found</h1>
+            <img src="img/mbm_300.png" alt="Mathinfernal Channel Logo" class="logo">
+            <div class="downloads-content">
+                <p data-lang-key="404_message">Sorry, the page you are looking for does not exist.</p>
+                <a href="index.html" class="back-link" data-lang-key="back_to_home">Back to Home</a>
+            </div>
+        </div>
+        <script>
+            const translations = {
+                fr: {
+                    "404_title": "404 - Page Introuvable",
+                    "404_heading": "Page Introuvable",
+                    "404_message": "Désolé, la page que vous recherchez n'existe pas.",
+                    "back_to_home": "Retour à l'accueil"
+                },
+                en: {
+                    "404_title": "404 - Page Not Found",
+                    "404_heading": "Page Not Found",
+                    "404_message": "Sorry, the page you are looking for does not exist.",
+                    "back_to_home": "Back to Home"
+                }
+            };
+
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    element.textContent = translations[lang][key] || element.textContent;
+                    if (element.tagName === 'TITLE') {
+                        document.title = translations[lang][key] || document.title;
+                    }
+                });
+                document.documentElement.lang = lang;
+                document.getElementById('lang-toggle').textContent = lang === 'fr' ? 'EN' : 'FR';
+                localStorage.setItem('language', lang);
+            }
+
+            const savedLang = localStorage.getItem('language') || 'fr';
+            updateLanguage(savedLang);
+
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'fr';
+                const newLang = currentLang === 'fr' ? 'en' : 'fr';
+                updateLanguage(newLang);
+            });
+        </script>
+    </body>
+</html>
