@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title data-lang-key="thirsty_title">Thirsty - Made by Mathinfernal</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="container">
+            <button id="lang-toggle" aria-label="Toggle language">EN</button>
+            <h1 data-lang-key="thirsty">Thirsty</h1>
+            <img src="../img/thirsty_icon.png" alt="Thirsty Game Logo" class="logo">
+            <div class="downloads-content">
+                <p data-lang-key="thirsty_desc">Thirsty is an indie game developed by Mathinfernal in just 2 days for the 8th SpeedJam.</p>
+                <ul>
+                    <li><a href="../img/thirsty.exe" target="_blank" data-lang-key="thirsty_download">Download Thirsty (web)</a> - 
+                    <span data-lang-key="thirsty_download_desc">The game will run automatically, no download needed.</span></li>
+                </ul>
+                <a href="../downloads.html" class="back-link" data-lang-key="back_to_downloads">Back to Downloads</a>
+            </div>
+        </div>
+        <script>
+            const translations = {
+                fr: {
+                    thirsty_title: "Thirsty - Fait par Mathinfernal",
+                    thirsty: "Thirsty",
+                    thirsty_desc: "Thirsty est un jeu indé développé par Mathinfernal en seulement 2 jours pour la 8e SpeedJam.",
+                    thirsty_download: "Ouvrir Thirsty (web)",
+                    thirsty_download_desc: "Le jeu s'exécute automatiquement, aucun téléchargement requis.",
+                    back_to_downloads: "Retour aux téléchargements"
+                },
+                en: {
+                    thirsty_title: "Thirsty - Made by Mathinfernal",
+                    thirsty: "Thirsty",
+                    thirsty_desc: "Thirsty is an indie game developed by Mathinfernal in just 2 days for the 8th SpeedJam.",
+                    thirsty_download: "Open Thirsty (web)",
+                    thirsty_download_desc: "The game will run automatically, no download needed.",
+                    back_to_downloads: "Back to Downloads"
+                }
+            };
+
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    element.textContent = translations[lang][key] || element.textContent;
+                    if (element.tagName === 'TITLE') {
+                        document.title = translations[lang][key] || document.title;
+                    }
+                });
+                document.documentElement.lang = lang;
+                document.getElementById('lang-toggle').textContent = lang === 'fr' ? 'EN' : 'FR';
+                localStorage.setItem('language', lang);
+            }
+
+            const savedLang = localStorage.getItem('language') || 'fr';
+            updateLanguage(savedLang);
+
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'fr';
+                const newLang = currentLang === 'fr' ? 'en' : 'fr';
+                updateLanguage(newLang);
+            });
+        </script>
+    </body>
+</html>

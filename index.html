@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title data-lang-key="site_title">About Mathinfernal</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <button id="lang-toggle" aria-label="Toggle language">EN</button>
+            <h1>Mathinfernal</h1>
+            <img src="img/icon_300.png" alt="Mathinfernal Channel Logo" class="logo">
+            <br>
+            <a href="downloads.html" class="downloads-link" data-lang-key="downloads">Made by Mathinfernal</a>
+            <div class="social-links">
+                <a href="https://www.youtube.com/@Mathinfernal?sub_confirmation=1" target="_blank"><img src="img/youtube.png" alt="YouTube"></a>
+                <a href="https://www.twitch.tv/mathinfernal" target="_blank"><img src="img/twitch.png" alt="Twitch"></a>
+                <a href="https://github.com/Mathinfernal" target="_blank"><img src="img/github.png" alt="GitHub"></a>
+                <a href="https://discord.gg/ngZAHcGKgh" target="_blank"><img src="img/discord.png" alt="Discord"></a>
+                <!-- <a href="https://www.patreon.com/Mathinfernal" target="_blank"><img src="img/patreon.png" alt="Patreon"></a> -->
+                <a href="https://mathinfernal.itch.io/" target="_blank"><img src="img/itchio.png" alt="Itch.io"></a>
+                <a href="https://x.com/Mathinfernal" target="_blank"><img src="img/x.png" alt="X"></a>
+            </div>
+        </div>
+        <script>
+            const translations = {
+                fr: {
+                    site_title: "A propos de Mathinfernal",
+                    downloads: "Fait par Mathinfernal"
+                },
+                en: {
+                    site_title: "About Mathinfernal",
+                    downloads: "Made by Mathinfernal"
+                }
+            };
+
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    element.textContent = translations[lang][key] || element.textContent;
+                    if (element.tagName === 'TITLE') {
+                        document.title = translations[lang][key] || document.title;
+                    }
+                });
+                document.documentElement.lang = lang;
+                document.getElementById('lang-toggle').textContent = lang === 'fr' ? 'EN' : 'FR';
+                localStorage.setItem('language', lang);
+            }
+
+            const savedLang = localStorage.getItem('language') || 'fr';
+            updateLanguage(savedLang);
+
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'fr';
+                const newLang = currentLang === 'fr' ? 'en' : 'fr';
+                updateLanguage(newLang);
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title data-lang-key="unmute_title">Unmute - Made by Mathinfernal</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="container">
+            <button id="lang-toggle" aria-label="Toggle language">EN</button>
+            <h1 data-lang-key="unmute">Unmute</h1>
+            <img src="../img/unmute_icon.png" alt="Unmute App Logo" class="logo">
+            <div class="downloads-content">
+                <p data-lang-key="unmute_desc">Unmute is a free, lightweight, and ad-free music player designed by Mathinfernal for Windows users.</p>
+                <ul>
+                    <li><a href="../img/unmute.exe" target="_blank" data-lang-key="unmute_download">Download Unmute (PC)</a> - 
+                    <span data-lang-key="unmute_download_desc">The music player for Windows.</span></li>
+                </ul>
+                <a href="../downloads.html" class="back-link" data-lang-key="back_to_downloads">Back to Downloads</a>
+            </div>
+        </div>
+        <script>
+            const translations = {
+                fr: {
+                    unmute_title: "Unmute - Fait par Mathinfernal",
+                    unmute: "Unmute",
+                    unmute_desc: "Unmute est un lecteur de musique gratuit, léger et sans publicité conçu par Mathinfernal pour les utilisateurs Windows.",
+                    unmute_download: "Télécharger Unmute (PC)",
+                    unmute_download_desc: "Le lecteur de musique pour Windows.",
+                    back_to_downloads: "Retour aux téléchargements"
+                },
+                en: {
+                    unmute_title: "Unmute - Made by Mathinfernal",
+                    unmute: "Unmute",
+                    unmute_desc: "Unmute is a free, lightweight, and ad-free music player designed by Mathinfernal for Windows users.",
+                    unmute_download: "Download Unmute (PC)",
+                    unmute_download_desc: "The music player for Windows.",
+                    back_to_downloads: "Back to Downloads"
+                }
+            };
+
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    element.textContent = translations[lang][key] || element.textContent;
+                    if (element.tagName === 'TITLE') {
+                        document.title = translations[lang][key] || document.title;
+                    }
+                });
+                document.documentElement.lang = lang;
+                document.getElementById('lang-toggle').textContent = lang === 'fr' ? 'EN' : 'FR';
+                localStorage.setItem('language', lang);
+            }
+
+            const savedLang = localStorage.getItem('language') || 'fr';
+            updateLanguage(savedLang);
+
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'fr';
+                const newLang = currentLang === 'fr' ? 'en' : 'fr';
+                updateLanguage(newLang);
+            });
+        </script>
+    </body>
+</html>

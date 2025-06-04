@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title data-lang-key="downloads_title">Made by Mathinfernal</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <button id="lang-toggle" aria-label="Toggle language">EN</button>
+            <h1 data-lang-key="downloads_title">Made by Mathinfernal</h1>
+            <img src="img/mbm_300.png" alt="Mathinfernal Channel Logo" class="logo">
+            <div class="downloads-content">
+                <h2 data-lang-key="pc_games">PC Games</h2>
+                <p data-lang-key="pc_games_desc">Indie games developed by Mathinfernal for PC users.</p>
+                <ul>
+                    <li><a href="downloads/thirsty_page.html" data-lang-key="thirsty_link">Thirsty</a> - <span 
+                    data-lang-key="thirsty_desc">A game created in 2 days for the 8th SpeedJam.</span></li>
+                </ul>
+                <h2 data-lang-key="desktop_apps">Desktop Apps</h2>
+                <p data-lang-key="desktop_apps_desc">Apps made by Mathinfernal for PC users.</p>
+                <ul>
+                    <li><a href="downloads/unmute.html" data-lang-key="unmute_link">Unmute</a> - <span 
+                    data-lang-key="unmute_desc">A free, lightweight, ad-free music player.</span></li>
+                </ul>
+                <a href="index.html" class="back-link" data-lang-key="back_to_home">Back to Home</a>
+            </div>
+        </div>
+        <script>
+            const translations = {
+                fr: {
+                    downloads_title: "Fait par Mathinfernal",
+                    pc_games: "Jeux PC",
+                    pc_games_desc: "Jeux indés développés par Mathinfernal pour les utilisateurs PC.",
+                    thirsty_link: "Thirsty",
+                    thirsty_desc: "Un jeu créé en 2 jours pour la 8e SpeedJam.",
+                    desktop_apps: "Applications de bureau",
+                    desktop_apps_desc: "Applications créées par Mathinfernal pour les utilisateurs PC.",
+                    unmute_link: "Unmute",
+                    unmute_desc: "Un lecteur de musique gratuit, léger et sans publicité.",
+                    back_to_home: "Retour à l'accueil"
+                },
+                en: {
+                    downloads_title: "Made by Mathinfernal",
+                    pc_games: "PC Games",
+                    pc_games_desc: "Indie games developed by Mathinfernal for PC users.",
+                    thirsty_link: "Thirsty",
+                    thirsty_desc: "A game created in 2 days for the 8th SpeedJam.",
+                    desktop_apps: "Desktop Apps",
+                    desktop_apps_desc: "Apps made by Mathinfernal for PC users.",
+                    unmute_link: "Unmute",
+                    unmute_desc: "A free, lightweight, ad-free music player.",
+                    back_to_home: "Back to Home"
+                }
+            };
+
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    element.textContent = translations[lang][key] || element.textContent;
+                    if (element.tagName === 'TITLE') {
+                        document.title = translations[lang][key] || document.title;
+                    }
+                });
+                document.documentElement.lang = lang;
+                document.getElementById('lang-toggle').textContent = lang === 'fr' ? 'EN' : 'FR';
+                localStorage.setItem('language', lang);
+            }
+
+            const savedLang = localStorage.getItem('language') || 'fr';
+            updateLanguage(savedLang);
+
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'fr';
+                const newLang = currentLang === 'fr' ? 'en' : 'fr';
+                updateLanguage(newLang);
+            });
+        </script>
+    </body>
+</html>
